@@ -37,9 +37,13 @@ def goods():
 
                 price_goods = line[2]
                 if price_goods is None:
-                    price_goods = 0
+                    # Skip if price unknown
+                    continue
 
                 name_unit = line[3]
+                if name_unit == 'гр':
+                    name_unit = 'г'
+
                 bar_code = line[4]
                 type_goods = line[5]
 
@@ -64,6 +68,7 @@ def goods():
                                             name_group,
                                             id_group,
                                             id_goods)
+
         except Exception as e:
             print('goods(): {}'.format(e))
 
