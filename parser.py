@@ -1,16 +1,14 @@
 import postgresql
 import config
+import json
 
-from apscheduler.schedulers.background import BackgroundScheduler
-
-export_template = config.CSV_TEMPLATE
-export_line = config.CSV_LINE
 connection_string = config.CONNECTION_STRING
+export_fields = config.CSV_FIELDS
 
 
 def goods():
     with postgresql.open(connection_string) as db:
-        goods = ''
+        goods = []
         query = '''
         SELECT 
             name_goods, 
@@ -36,7 +34,7 @@ def goods():
                 goods_queries = name_goods + ', ' + name_goods.replace(' ', ',')
 
                 price_goods = line[2]
-                if price_goods is None:
+                if price_goods is None or price_goods == 0:
                     # Skip if price unknown
                     continue
 
@@ -58,21 +56,34 @@ def goods():
                 if rest_goods == 0:
                     goods_availability = '3'
 
-                goods += export_line.format(name_goods,
-                                            id_goods,
-                                            goods_queries,
-                                            price_goods,
-                                            name_unit,
-                                            goods_availability,
-                                            rest_goods,
-                                            name_group,
-                                            id_group,
-                                            id_goods)
+
+                goods_description = ''
+
+                goods_image = ''
+
+                row = dict.fromkeys(export_fields)
+                row[export_fields[0]] = name_goods
+                row[export_fields[1]] = id_goods
+                row[export_fields[2]] = goods_queries
+                row[export_fields[3]] = goods_description
+                row[export_fields[4]] = 'r'
+                row[export_fields[5]] = price_goods
+                row[export_fields[11]] = 'UAH'
+                row[export_fields[15]] = name_unit
+                row[export_fields[19]] = goods_image
+                row[export_fields[20]] = goods_availability
+                row[export_fields[21]] = rest_goods
+                row[export_fields[22]] = name_group
+                row[export_fields[24]] = id_group
+                row[export_fields[33]] = id_goods
+
+                goods.append(row)
+
+                # break
 
         except Exception as e:
             print('goods(): {}'.format(e))
 
-        message = export_template.format(goods)
-        print(message)
+        print(goods)
 
-        return message
+        return goods
