@@ -30,7 +30,7 @@ def goods():
 
             for line in result:
                 name_goods = line[0].replace('"', '""')
-                id_goods = line[1]
+                id_goods = str(line[1])
                 goods_queries = name_goods + ', ' + name_goods.replace(' ', ',')
 
                 price_goods = line[2]
@@ -58,8 +58,20 @@ def goods():
 
 
                 goods_description = ''
+                # try:
+                #     with open('/Users/skipper/Documents/Projects/python/googlesearch/' + name_goods + '.txt', 'r') as file:
+                #         goods_description = file.read()
+                # except IOError as e:
+                #     print('description(): {}'.format(e))
+
 
                 goods_image = ''
+                # try:
+                #     with open('/Users/skipper/Documents/Projects/python/googleimages/' + name_goods + '/Scrapper_1.json', 'r') as file:
+                #         goods_image = json.loads(file.read())[5]
+                # except IOError as e:
+                #     print('image(): {}'.format(e))
+
 
                 row = dict.fromkeys(export_fields)
                 row[export_fields[0]] = name_goods
@@ -76,14 +88,14 @@ def goods():
                 row[export_fields[22]] = name_group
                 row[export_fields[24]] = id_group
                 row[export_fields[33]] = id_goods
-
+                #print(row)
                 goods.append(row)
 
                 # break
 
         except Exception as e:
-            print('goods(): {}'.format(e))
+            print('Exception: goods(): {}'.format(e))
 
-        print(goods)
+        #print(goods)
 
         return goods
