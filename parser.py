@@ -3,7 +3,7 @@ import config
 import json
 
 connection_string = config.CONNECTION_STRING
-export_fields = config.CSV_FIELDS
+export_fields = config.CSV_MAJOR_FIELDS
 
 
 def goods():
@@ -76,18 +76,18 @@ def goods():
                 row = dict.fromkeys(export_fields)
                 row[export_fields[0]] = name_goods
                 row[export_fields[1]] = id_goods
-                row[export_fields[2]] = goods_queries
-                row[export_fields[3]] = goods_description
-                row[export_fields[4]] = 'r'
-                row[export_fields[5]] = price_goods
-                row[export_fields[11]] = 'UAH'
-                row[export_fields[15]] = name_unit
-                row[export_fields[19]] = goods_image
-                row[export_fields[20]] = goods_availability
-                row[export_fields[21]] = rest_goods
-                row[export_fields[22]] = name_group
-                row[export_fields[24]] = id_group
-                row[export_fields[33]] = id_goods
+                #row[export_fields[2]] = goods_queries
+                #row[export_fields[3]] = goods_description
+                #row[export_fields[4]] = 'r'
+                row[export_fields[2]] = price_goods
+                #row[export_fields[11]] = 'UAH'
+                #row[export_fields[15]] = name_unit
+                #row[export_fields[19]] = goods_image
+                row[export_fields[3]] = goods_availability
+                row[export_fields[4]] = rest_goods
+                #row[export_fields[22]] = name_group
+                #row[export_fields[24]] = id_group
+                #row[export_fields[33]] = id_goods
                 #print(row)
                 goods.append(row)
 
