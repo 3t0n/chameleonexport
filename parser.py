@@ -72,22 +72,17 @@ def goods():
                 # except IOError as e:
                 #     print('image(): {}'.format(e))
 
-
                 row = dict.fromkeys(export_fields)
                 row[export_fields[0]] = name_goods
                 row[export_fields[1]] = id_goods
-                #row[export_fields[2]] = goods_queries
-                #row[export_fields[3]] = goods_description
-                #row[export_fields[4]] = 'r'
-                row[export_fields[2]] = price_goods
-                #row[export_fields[11]] = 'UAH'
-                #row[export_fields[15]] = name_unit
-                #row[export_fields[19]] = goods_image
-                row[export_fields[3]] = goods_availability
-                row[export_fields[4]] = rest_goods
-                #row[export_fields[22]] = name_group
-                #row[export_fields[24]] = id_group
-                #row[export_fields[33]] = id_goods
+                row[export_fields[2]] = goods_description
+                row[export_fields[3]] = price_goods
+                row[export_fields[4]] = 'UAH'
+                row[export_fields[5]] = name_unit
+                row[export_fields[6]] = goods_availability
+                row[export_fields[7]] = rest_goods
+                row[export_fields[8]] = id_goods
+
                 #print(row)
                 goods.append(row)
 

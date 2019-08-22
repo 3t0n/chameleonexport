@@ -36,25 +36,30 @@ if __name__ == '__main__':
         for prom_row in prom_data:
             if chameleon_row[export_fields[1]] == prom_row[export_fields[1]]:
 
+                name_goods        = prom_row[export_fields[0]]
+                id_goods          = prom_row[export_fields[1]]
+                desc_goods        = prom_row[export_fields[2]]
+                price_goods       = chameleon_row[export_fields[3]]
+                currency_goods    = prom_row[export_fields[4]]
+                unit_goods        = prom_row[export_fields[5]]
+                goods_availability= chameleon_row[export_fields[6]]
+                rest_goods        = chameleon_row[export_fields[7]]
+                external_id_goods = prom_row[export_fields[8]]
 
-                name_goods = prom_row[export_fields[0]]
-                id_goods = prom_row[export_fields[1]]
-                price_goods = chameleon_row[export_fields[2]]
-                rest_goods = chameleon_row[export_fields[4]]
-
-                goods_availability = '+'
-                if rest_goods == 0:
-                    goods_availability = '3'
+                #print(chameleon_row)
 
                 row = dict.fromkeys(export_fields)
-                row[export_fields[0]] = name_goods #name_goods
-                row[export_fields[1]] = id_goods #id_goods
+                row[export_fields[0]] = name_goods
+                row[export_fields[1]] = id_goods
+                row[export_fields[2]] = desc_goods
+                row[export_fields[3]] = price_goods
+                row[export_fields[4]] = currency_goods
+                row[export_fields[5]] = unit_goods
+                row[export_fields[6]] = goods_availability
+                row[export_fields[7]] = rest_goods
+                row[export_fields[8]] = external_id_goods
 
-                row[export_fields[2]] = price_goods #price_goods
-                row[export_fields[3]] = goods_availability #goods_availability
-                row[export_fields[4]] = rest_goods #rest_goods
-
-                # print(row)
+                #print(row)
                 export_data.append(row)
 
 
