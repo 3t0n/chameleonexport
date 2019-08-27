@@ -18,8 +18,7 @@ def goods():
             (SELECT name_unit FROM front.unit WHERE is_default = true AND id_goods = goods.id_goods),
             (SELECT bar_code FROM front.bar_codes WHERE id_goods = goods.id_goods LIMIT 1), 
             type_goods,
-            (SELECT rest::numeric(12,0) FROM front.rest where id_goods = goods.id_goods 
-                ORDER BY time_rest DESC LIMIT 1),
+            (SELECT SUM(rest)::numeric(12,0) FROM front.v_rest where id_goods = goods.id_goods) as rest,
             id_group,
             (SELECT name_group FROM front.group_goods WHERE id_group = goods.id_group)
         FROM front.goods 
