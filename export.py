@@ -34,7 +34,7 @@ if __name__ == '__main__':
 
     for chameleon_row in chameleon_data:
         for prom_row in prom_data:
-            if chameleon_row[export_fields[1]] == prom_row[export_fields[1]]:
+            if chameleon_row[export_fields[1]] == prom_row[export_fields[1]] and prom_row[export_fields[8]] != '':
 
                 name_goods        = prom_row[export_fields[0]]
                 id_goods          = prom_row[export_fields[1]]
